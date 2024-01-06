@@ -62,6 +62,14 @@ def main():
                 task = task_list[task_index - 1]
                 task["is_done"] = True
                 console.print(f'The [green]"{task["name"]}"[/green] task is done!')
+            case '4':
+                if len(task_list) == 0:
+                    console.print('[red]Task list has no tasks![/red]')
+                    continue
+                task_index = input_task_index(task_list)
+                task = task_list[task_index - 1]
+                task_list.pop(task_index - 1)
+                console.print(f'The [red]"{task["name"]}"[/red] task was deleted!')
 
     console.print('Thanks for using To-Do List!')
 
