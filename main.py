@@ -70,6 +70,15 @@ def main():
                 task = task_list[task_index - 1]
                 task_list.pop(task_index - 1)
                 console.print(f'The [red]"{task["name"]}"[/red] task was deleted!')
+            case '5':
+                new_task_list = []
+                for task in task_list:
+                    if task["is_done"]:
+                        new_task_list.insert(0, task)
+                    else:
+                        new_task_list.append(task)
+                task_list = new_task_list
+                console.print('Task list was sorted!')
 
     console.print('Thanks for using To-Do List!')
 
