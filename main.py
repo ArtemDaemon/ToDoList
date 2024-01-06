@@ -11,6 +11,18 @@ def str_task(task):
     return f'[{"X" if task["is_done"] else " "}] {task["name"]}'
 
 
+def input_task_index(task_list):
+    while True:
+        value = Prompt.ask(f'Enter task index (1-{len(task_list)})')
+        try:
+            value = int(value)
+            if 1 <= value <= len(task_list):
+                return value
+            print('Value must be task list element index. Please try again.')
+        except ValueError:
+            print(f'"{value}" is not a valid integer value. Please try again.')
+
+
 def main():
     task_list = []
 
@@ -42,6 +54,14 @@ def main():
                 console.print('Task list:')
                 for index, task in enumerate(task_list):
                     console.print(f'[red]{index + 1}.[/red] {str_task(task)}')
+            case '3':
+                if len(task_list) == 0:
+                    console.print('[red]Task list has no tasks![/red]')
+                    continue
+                task_index = input_task_index(task_list)
+                task = task_list[task_index - 1]
+                task["is_done"] = True
+                console.print(f'The [green]"{task["name"]}"[/green] task is done!')
 
     console.print('Thanks for using To-Do List!')
 
