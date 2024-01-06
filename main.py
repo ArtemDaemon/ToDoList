@@ -7,6 +7,10 @@ console = Console()
 EXIT_KEY = '6'
 
 
+def str_task(task):
+    return f'[{"X" if task["is_done"] else " "}] {task["name"]}'
+
+
 def main():
     task_list = []
 
@@ -18,12 +22,12 @@ def main():
     console.print('[red]3.[/red] Complete task')
     console.print('[red]4.[/red] Delete task')
     console.print('[red]5.[/red] Sort task list')
-    console.print('[red]6.[/red] Exit\n')
+    console.print('[red]6.[/red] Exit')
 
     input_key = ''
 
     while input_key != EXIT_KEY:
-        input_key = Prompt.ask('Please, choose menu item (1-6)',
+        input_key = Prompt.ask('\nPlease, choose menu item (1-6)',
                                choices=['1', '2', '3', '4', '5', '6'], show_choices=False)
 
         match input_key:
@@ -33,8 +37,11 @@ def main():
                     'name': task_name,
                     'is_done': False
                 })
-                console.print(f'The [green]"{task_name}"[/green] task has been added!\n')
-            # TODO: case '2'
+                console.print(f'The [green]"{task_name}"[/green] task has been added!')
+            case '2':
+                console.print('Task list:')
+                for index, task in enumerate(task_list):
+                    console.print(f'[red]{index + 1}.[/red] {str_task(task)}')
 
     console.print('Thanks for using To-Do List!')
 
